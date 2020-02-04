@@ -11,16 +11,12 @@ pipeline {
 				sh 'mvn clean package'
             }
         }
-        stage('build docker image') {
-			steps {
-				sh 'docker build -t lerndevops/samplejavaapp .'
-            }	
-        }
+       
         stage('push docker image') {
 			steps {
 		                sh "docker login -u venkytvh -p venky048@"
-                                
-				sh 'docker push lerndevops/samplejavaapp:$build_id'
+                                sh "docker  build -t venkytvh/javaapp ."
+				sh "docker push venkytvh/javaapp:$build_id"
 			}
         }
      }
